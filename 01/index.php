@@ -29,7 +29,7 @@
     <li>
         <a href="http://www.syntevo.com/smartgit/download" target="_blank">скачать smartgit</a>
     </li>
-</ul>
+</ul> 
 
 </body>
 </html>
