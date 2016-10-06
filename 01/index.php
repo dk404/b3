@@ -1,12 +1,13 @@
 <?php
 
+    //
 
 ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8"/>
-    <title></title>
+    <title>Знакомство с GIT (Контроль версий)</title>
     <link rel="shortcut icon" href=""/>
     <link rel="stylesheet" type="text/css" media="all" href=""/>
 
@@ -19,7 +20,16 @@
 
 <body>
 
-hello  
+<ul>
+    <li>
+        <a href="https://yadi.sk/d/dEH8meADwNg45">Скачать openServer</a></li>
+    <li>
+        <a href="https://github.com/shturnev/b3" target="_blank">наш репозиторий на github</a>
+    </li>
+    <li>
+        <a href="http://www.syntevo.com/smartgit/download" target="_blank">скачать smartgit</a>
+    </li>
+</ul>
 
 </body>
 </html>
