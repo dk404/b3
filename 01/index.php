@@ -20,6 +20,9 @@
 
 <body>
 
+
+<? require_once("../02/settings.php"); ?>
+
 <ul>
     <li>
         <a href="https://yadi.sk/d/dEH8meADwNg45">Скачать openServer</a></li>
@@ -29,7 +32,7 @@
     <li>
         <a href="http://www.syntevo.com/smartgit/download" target="_blank">скачать smartgit</a>
     </li>
-</ul> 
+</ul>
 
 </body>
 </html>
