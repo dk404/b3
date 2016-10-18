@@ -3,7 +3,7 @@
 function db_connect(){
 
     $connect_settings = [
-        "host"  => "127.0.0.1"
+          "host"  => "127.0.0.1"
         , "login" => "test"
         , "pass"  => 123
         , "db"    => "b3"
