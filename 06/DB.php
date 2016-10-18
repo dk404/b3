@@ -2,11 +2,11 @@
 class DB
 {
     private $connect_settings = [
-                                      "host"  => "127.0.0.1"
-                                    , "login" => "test"
-                                    , "pass"  => 123
-                                    , "db"    => "b3"
-                                ];
+        "host"  => "127.0.0.1"
+        , "login" => "test"
+        , "pass"  => 123
+        , "db"    => "b3"
+    ];
 
     private $db_connect;
 
@@ -35,7 +35,7 @@ class DB
 
     public function insert($table, $arr, $close = false){
 
-            $this->connect();
+        $this->connect();
 
         $keys = array_keys($arr);
         $values = array_values($arr);
@@ -88,31 +88,27 @@ class DB
     }
 
 
-public function delete($table, $where, $close = false)
-{
+    public function delete($table, $where, $close = false)
+    {
 
-    $this->connect();
+        $this->connect();
 
-    $resdb = $this->db_connect->query("DELETE FROM ".$table." WHERE ".$where);
-    if(!$resdb){
-        $result["error"] = $this->db_connect->connect_errno;
-        $result["error_text"] = $this->db_connect->connect_error;
+        $resdb = $this->db_connect->query("DELETE FROM ".$table." WHERE ".$where);
+        if(!$resdb){
+            $result["error"] = $this->db_connect->connect_errno;
+            $result["error_text"] = $this->db_connect->connect_error;
+        }
+        $result["result"] = $resdb;
+
+        //закрываем соединение с бд
+        if($close){
+            $this->db_connect->close();
+        }
+
+        //response
+        return $result;
+
     }
-    $result["result"] = $resdb;
-
-    //закрываем соединение с бд
-    if($close){
-        $this->db_connect->close();
-    }
-
-    //response
-    return $result;
-
-
-}
-
-
-
 
 
 
