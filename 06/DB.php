@@ -2,11 +2,11 @@
 class DB
 {
     private $connect_settings = [
-                                      "host"  => "127.0.0.1"
-                                    , "login" => "test"
-                                    , "pass"  => 123
-                                    , "db"    => "b3"
-                                ];
+        "host"  => "127.0.0.1"
+        , "login" => "test"
+        , "pass"  => 123
+        , "db"    => "b3"
+    ];
 
     private $db_connect;
 
@@ -82,9 +82,9 @@ class DB
         $result["result"] = $resdb;
 
         //закрываем соединение с бд
-         if($close){
-             $this->db_connect->close();
-            }
+        if($close){
+            $this->db_connect->close();
+        }
         //response
         return $result;
     }
@@ -138,7 +138,7 @@ class DB
         return $result;
     }
 
-    }
+}
 
 
 
