@@ -35,9 +35,7 @@ class DB
 
     public function insert($table, $arr, $close = false){
 
-        if(!$this->db_connect->ping()){
             $this->connect();
-        }
 
         $keys = array_keys($arr);
         $values = array_values($arr);
@@ -60,6 +58,61 @@ class DB
         //response
         return $result;
     }
+
+
+    public function update($table, $arr, $where, $close = false){
+
+        $this->connect();
+
+        $newArr = [];
+        foreach($arr as $key => $value){
+            $newArr[] = $key."='".$value."'";
+        }
+
+
+
+        $resdb =  $this->db_connect->query("UPDATE ".$table." SET ".implode(",", $newArr). " WHERE ".$where);
+        if(!$resdb){
+            $result["error"] =$this->db_connect->connect_errno;
+            $result["error_text"] = $this->db_connect->connect_error;
+        }
+        $result["result"] = $resdb;
+
+        //закрываем соединение с бд
+        if($close){
+            $this->db_connect->close();
+        }
+
+        //response
+        return $result;
+    }
+
+
+public function delete($table, $where, $close = false)
+{
+
+    $this->connect();
+
+    $resdb = $this->db_connect->query("DELETE FROM ".$table." WHERE ".$where);
+    if(!$resdb){
+        $result["error"] = $this->db_connect->connect_errno;
+        $result["error_text"] = $this->db_connect->connect_error;
+    }
+    $result["result"] = $resdb;
+
+    //закрываем соединение с бд
+    if($close){
+        $this->db_connect->close();
+    }
+
+    //response
+    return $result;
+
+
+}
+
+
+
 
 
 
