@@ -3,23 +3,40 @@ class DB
 {
     private $connect_settings = [
                                       "host"  => "127.0.0.1"
-                                    , "login" => "test"
-                                    , "pass"  => 123
+                                    , "login" => "root"
+                                    , "pass"  => ''
                                     , "db"    => "b3"
                                 ];
 
     private $db_connect;
 
 
-    public function __construct()
+    public function __construct($otherSettings = null)
     {
+        if($otherSettings)
+        {
+            $this->connect_settings = $otherSettings;
+        }
+    }
 
+
+    /**
+     * Закрываем работу с бд
+     */
+    private function disconnect()
+    {
+        if($this->db_connect instanceof mysqli)
+        {
+            $this->db_connect->close();
+            unset($this->db_connect);
+        }
     }
 
 
     private function connect()
     {
-        if($this->db_connect->ping()){ return $this->db_connect; } //false
+//        if($this->db_connect && $this->db_connect->ping()){ return $this->db_connect; } //false
+        if($this->db_connect instanceof mysqli && $this->db_connect->ping()){ return $this->db_connect; } //false
 
         $mysqli = new mysqli($this->connect_settings["host"], $this->connect_settings["login"], $this->connect_settings["pass"], $this->connect_settings["db"]);
         if($mysqli->connect_errno){
@@ -32,12 +49,16 @@ class DB
     }
 
 
-
+    /**
+     * Сделать запись в бд
+     * @param $table - название таблицы
+     * @param (array) $arr - данные для записи
+     * @param bool|false $close - закрывать ли соединение с бд
+     * @return mixed
+     */
     public function insert($table, $arr, $close = false){
 
-        if(!$this->db_connect->ping()){
-            $this->connect();
-        }
+        $this->connect();
 
         $keys = array_keys($arr);
         $values = array_values($arr);
@@ -52,9 +73,7 @@ class DB
         $result["result"] = $resInsert;
 
         //закрываем соединение с бд
-        if($close){
-            $this->db_connect->close();
-        }
+        if($close){ $this->db_connect; }
 
 
         //response
