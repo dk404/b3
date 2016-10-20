@@ -23,7 +23,7 @@ if($_POST["method_name"])
 
     endswitch;
 }
-     
+
 
 
 ?>
