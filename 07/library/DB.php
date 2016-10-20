@@ -23,7 +23,7 @@ class DB
     /**
      * Закрываем работу с бд
      */
-    private function disconnect()
+    private function db_disconnect()
     {
         if($this->db_connect instanceof mysqli)
         {
@@ -73,7 +73,7 @@ class DB
         $result["result"] = $resInsert;
 
         //закрываем соединение с бд
-        if($close){ $this->db_connect; }
+        if($close){ $this->db_disconnect(); }
 
 
         //response
@@ -81,6 +81,14 @@ class DB
     }
 
 
+    /**
+     * Метод для внесения правок в базу
+     * @param $table -  название таблицы
+     * @param $arr
+     * @param $where
+     * @param bool|false $close
+     * @return mixed
+     */
     public function update($table, $arr, $where, $close = false){
 
         $this->connect();
@@ -98,7 +106,7 @@ class DB
         $result["result"] = $resdb;
 
         //закрываем соединение с бд
-        if($close){ $this->db_connect; }
+        if($close){ $this->db_disconnect(); }
 
         //response
         return $result;
@@ -118,7 +126,7 @@ class DB
         $result["result"] = $resdb;
 
         //закрываем соединение с бд
-        if($close){ $this->db_connect; }
+        if($close){ $this->db_disconnect(); }
 
         //response
         return $result;
@@ -141,7 +149,7 @@ class DB
         }
 
         //закрываем соединение с бд
-        if($close){ $this->db_connect; }
+        if($close){ $this->db_disconnect(); }
 
         //response
         return $result;

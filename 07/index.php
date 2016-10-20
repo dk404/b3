@@ -1,5 +1,22 @@
 <?php
 require_once("library/DB.php");
+$DB = new DB();
+
+
+if($_POST["method_name"])
+{
+    switch ($_POST["method_name"]):
+        case "register":
+
+            $resDb = $DB->insert("users", ["user_name" => $_POST["login"], "pass" => $_POST["pass"]]);
+            $responseFromDb["error"]    = ($resDb["error"])? $resDb["error"] : false;
+            $responseFromDb["succes"]   = ($resDb["result"])? true : false;
+        break;
+
+    endswitch;
+}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -16,6 +33,49 @@ require_once("library/DB.php");
 </head>
 
 <body>
+
+<main>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.php">HOME</a>
+                </li>
+                <li>
+                    <a href="users.php">USERS</a>
+                </li>
+                <li>
+                    <a href="blog.php">BLOG</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="authBlock">
+            <a href="index.php?r=login">Login</a>
+            <a href="index.php?r=register">Register</a>
+        </div>
+    </header>
+
+
+    <? if(!$_GET["r"]){ ?>
+        <section id="welcome">
+            <h1>hello dear friend</h1>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid, at blanditiis consequuntur dolore
+                eaque enim est neque omnis quas quod soluta temporibus voluptatem! Aliquam est inventore iste nemo sequi!</p>
+        </section>
+    <? } ?>
+
+    <?
+    switch ($_GET["r"]):
+        case "login": require_once("blocks/login.php"); break;
+        case "register": require_once("blocks/register.php"); break;
+    endswitch;
+    ?>
+</main>
+
+
+
+
 
 <script type="text/javascript" src=""></script>
 </body>
