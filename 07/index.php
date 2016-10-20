@@ -9,9 +9,16 @@ if($_POST["method_name"])
         case "register":
 
             $resDb = $DB->insert("users", ["user_name" => $_POST["login"], "pass" => $_POST["pass"]]);
-            $responseFromDb["error"]    = ($resDb["error"])? $resDb["error"] : false;
+            $responseFromDb["error"]    = ($resDb["error"])? $resDb["error_text"] : false;
             $responseFromDb["succes"]   = ($resDb["result"])? true : false;
         break;
+
+        case "login":
+
+            $resDb = $DB->select("SELECT * FROM users WHERE user_name= '".$_POST["login"]."' AND pass = '".$_POST["pass"]."'");
+            $responseFromDb["error"]    = ($resDb["error"])? $resDb["error_text"] : false;
+            $responseFromDb["succes"]   = ($resDb["result"])? true : false;
+
 
     endswitch;
 }
