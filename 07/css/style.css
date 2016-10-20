@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/*------------------------------
+Основные настройки
+-------------------------------*/
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  font-size: 14px;
+  font-family: Verdana, Geneva, sans-serif;
+  background: #efefef; }
+
+/*------------------------------
+шаблонные селекторы
+-------------------------------*/
+header, header > nav > ul {
+  display: flex;
+  flex-wrap: wrap; }
+
+header > nav > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+/*------------------------------
+param
+-------------------------------*/
+main {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto; }
+
+header {
+  justify-content: space-between; }
+  header > nav {
+    position: relative; }
+    header > nav > ul li {
+      margin-right: 10px; }
+      header > nav > ul li a {
+        display: block;
+        padding: 8px 0;
+        font-size: 0.8em;
+        color: green; }
+        header > nav > ul li a:hover {
+          color: #00cd00; }
+  header > .authBlock {
+    position: relative; }
+    header > .authBlock a {
+      display: inline-block;
+      padding: 8px 0;
+      font-size: 0.8em;
+      color: green; }
+      header > .authBlock a:hover {
+        color: #00b300; }
+
+section#register .responseFromDb {
+  position: relative;
+  margin-bottom: 50px; }
+  section#register .responseFromDb .error, section#register .responseFromDb .succes {
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px; }
+  section#register .responseFromDb .succes {
+    border-color: green; }
+section#register h2 {
+  font-family: "Roboto Condensed", sans-serif;
+  color: gray; }
+section#register input[type='text'], section#register input[type='password'] {
+  padding: 6px 10px;
+  outline: none;
+  width: 300px; }
+
+/*# sourceMappingURL=style.css.map */
