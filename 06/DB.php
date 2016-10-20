@@ -142,7 +142,7 @@ class DB
             $this->db_connect->close();
         }
 
-        //response      
+        //response
         return $result;
     }
 }
