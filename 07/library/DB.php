@@ -143,8 +143,11 @@ class DB
             $result["error"] = $this->db_connect->connect_errno;
             $result["error_text"] = $this->db_connect->connect_error;
         }
-        else
-        {
+        else if($resdb->num_rows == 0) {
+            $result["error"] = 1;
+            $result["error_text"] = "записей не найдено";
+
+        }else{
             $result["result"] = $resdb->fetch_all(MYSQLI_ASSOC);
         }
 
