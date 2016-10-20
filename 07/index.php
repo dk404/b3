@@ -7,16 +7,18 @@ if($_POST["method_name"])
 {
     switch ($_POST["method_name"]):
         case "register":
-
             $resDb = $DB->insert("users", ["user_name" => $_POST["login"], "pass" => $_POST["pass"]]);
-            $responseFromDb["error"]    = ($resDb["error"])? $resDb["error"] : false;
+            $responseFromDb["error"]    = ($resDb["error_text"])? $resDb["error"] : false;
             $responseFromDb["succes"]   = ($resDb["result"])? true : false;
         break;
-        case "Login":
 
-            $resDb = $DB->select ("SELECT * FROM users WHERE user_name='".$_POST ["login"]."'AND pass '".$_POST ["pass"]."'");
-            $responseFromDb["error"]    = ($resDb["error"])? $resDb["error"] : false;
-            $responseFromDb["succes"]   = ($resDb["result"])? true : false;
+        case "login":
+
+
+
+            $resDb = $DB->select("SELECT * FROM users WHERE user_name = '".$_POST["login"]."'AND pass ='".$_POST["pass"]."'");
+            $responseFromDb["error"]    = ($resDb["error"])? $resDb["error_text"] : false;
+            $responseFromDb["succes"]   = ($resDb["result"])? $resDb["result"] : false;
 
 
         break;
@@ -43,25 +45,8 @@ if($_POST["method_name"])
 <body>
 
 <main>
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="index.php">HOME</a>
-                </li>
-                <li>
-                    <a href="users.php">USERS</a>
-                </li>
-                <li>
-                    <a href="blog.php">BLOG</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="authBlock">
-            <a href="index.php?r=login">Login</a>
-            <a href="index.php?r=register">Register</a>
-        </div>
-    </header>
+
+    <? require_once "blocks/header.php"; ?>
 
 
     <? if(!$_GET["r"]){ ?>
@@ -77,6 +62,7 @@ if($_POST["method_name"])
     switch ($_GET["r"]):
         case "login": require_once("blocks/login.php"); break;
         case "register": require_once("blocks/register.php"); break;
+        case "users": require_once("blocks/users.php"); break;
     endswitch;
     ?>
 </main>
