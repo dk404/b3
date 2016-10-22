@@ -43,6 +43,7 @@ class DB
             exit($mysqli->connect_error);
         }
 
+        $mysqli->set_charset("utf8");
         $this->db_connect = $mysqli;
 
         return $mysqli;
@@ -62,6 +63,10 @@ class DB
 
         $keys = array_keys($arr);
         $values = array_values($arr);
+
+//        foreach ($values as $value) {
+//            $value = $this->db_connect->real_escape_string($value);
+//        }
 
         $resInsert = $this->db_connect->query("INSERT INTO ".$table." (".implode(",", $keys).") VALUES ('".implode("','", $values)."')");
 

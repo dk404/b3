@@ -7,6 +7,11 @@ if($_POST["method_name"])
 {
     switch ($_POST["method_name"]):
         case "register":
+
+            $login = addslashes($_POST["login"]);
+
+
+
             $resDb = $DB->insert("users", ["user_name" => $_POST["login"], "pass" => $_POST["pass"]]);
             $responseFromDb["error"]    = ($resDb["error_text"])? $resDb["error"] : false;
             $responseFromDb["succes"]   = ($resDb["result"])? true : false;
