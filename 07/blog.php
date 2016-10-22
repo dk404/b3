@@ -1,6 +1,8 @@
 <?php
 require_once "library/DB.php";
+require_once "library/TextSecurity.php";
 $DB = new DB();
+$T_security = new TextSecurity();
 
 if($_POST["method_name"])
 {
@@ -13,7 +15,11 @@ if($_POST["method_name"])
 
         case "blog_edit":
 
-            $resDb = $DB->update("blog", ["title" => $_POST["title"], "descr" => $_POST["descr"], "text" => $_POST["text"]], "ID = ".$_POST["ID"]);
+            $title = $T_security->check1($_POST["title"]);
+
+
+
+            $resDb = $DB->update("blog", ["title" => $T_security->check1($_POST["title"]), "descr" => $_POST["descr"], "text" => $_POST["text"]], "ID = ".$_POST["ID"]);
             $responseFromDb["error"]    = ($resDb["error"])? $resDb["error_text"] : false;
             $responseFromDb["succes"]   = ($resDb["result"])? $resDb["result"] : false;
 
