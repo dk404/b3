@@ -64,9 +64,12 @@ class DB
         $keys = array_keys($arr);
         $values = array_values($arr);
 
-//        foreach ($values as $value) {
-//            $value = $this->db_connect->real_escape_string($value);
+//        foreach ($values as $key => $value) {
+//            $values[$key] = $this->db_connect->real_escape_string($value);
 //        }
+//        оно работает, но требует чтобы соединение с бд было активным! во время дебаггера, соединение успевает закрыться и потому возвращает пустой результат
+
+
 
         $resInsert = $this->db_connect->query("INSERT INTO ".$table." (".implode(",", $keys).") VALUES ('".implode("','", $values)."')");
 

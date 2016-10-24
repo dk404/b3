@@ -23,7 +23,7 @@ class TextSecurity
 
 
     /**
-     * Для админа
+     * Для админа, оставляем html
      * @param $array
      */
     public function check2($string)
