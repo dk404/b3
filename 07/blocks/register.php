@@ -9,7 +9,32 @@
 
     <div class="responseFromDb">
         <? if ($responseFromDb["error"]){ ?>
-            <div class="error"><? echo $responseFromDb["error"] ?></div>
+<!--            <div class="error">--><?// echo $responseFromDb["error"] ?><!--</div>-->
+
+<!--            <script type="text/javascript">-->
+<!--//                swal('sdsdssdsd');-->
+<!--            </script>-->
+
+
+            <?
+                echo "
+                        <script type='text/javascript'>
+                            $(document).ready(function () {
+//                                swal('Ошибка', '".$responseFromDb["error"]."', 'error');
+                                  swal({
+                                    title: 'Ошибка'
+                                    ,text: '".$responseFromDb["error"]."'
+                                    ,animation: 'slide-from-bottom'
+                                    ,confirmButtonColor: 'red'
+                                  });
+
+                            }); //Конец Ready
+                        </script>
+                ";
+            ?>
+
+            
+            
         <? } ?>
 
         <? if ($responseFromDb["succes"]){ ?>

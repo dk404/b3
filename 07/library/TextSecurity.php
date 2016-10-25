@@ -9,13 +9,13 @@ class TextSecurity
 {
     /**
      * Полный экран
-     * @param $array
+     * @param string $string - строка которая будет преобразована
+     * @return string
      */
     public function check1($string)
     {
-
         $string = htmlspecialchars($string, ENT_QUOTES, "UTF-8", true);
-        $string = str_replace("`",'&lsquo;',$string);
+        $string = str_replace("`", "&lsquo;", $string);
         $string = trim($string);
 
         return $string;
@@ -24,7 +24,7 @@ class TextSecurity
 
     /**
      * Для админа, оставляем html
-     * @param $array
+     * @return mixed|string
      */
     public function check2($string)
     {
