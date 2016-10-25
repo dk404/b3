@@ -43,6 +43,7 @@ class DB
             exit($mysqli->connect_error);
         }
 
+        $mysqli->set_charset("utf8");
         $this->db_connect = $mysqli;
 
         return $mysqli;
@@ -62,6 +63,13 @@ class DB
 
         $keys = array_keys($arr);
         $values = array_values($arr);
+
+//        foreach ($values as $key => $value) {
+//            $values[$key] = $this->db_connect->real_escape_string($value);
+//        }
+//        оно работает, но требует чтобы соединение с бд было активным! во время дебаггера, соединение успевает закрыться и потому возвращает пустой результат
+
+
 
         $resInsert = $this->db_connect->query("INSERT INTO ".$table." (".implode(",", $keys).") VALUES ('".implode("','", $values)."')");
 
@@ -142,6 +150,11 @@ class DB
         if(!$resdb){
             $result["error"] = $this->db_connect->connect_errno;
             $result["error_text"] = $this->db_connect->connect_error;
+        }
+        else if($resdb->num_rows == 0)
+        {
+            $result["error"] = 1;
+            $result["error_text"] = "no items";
         }
         else
         {
