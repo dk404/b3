@@ -1,6 +1,9 @@
 <?php
 require_once("library/DB.php");
+require_once("library/TextSecurity.php");
+
 $DB = new DB();
+$T_check = new TextSecurity();
 
 
 if($_POST["method_name"])
@@ -8,13 +11,23 @@ if($_POST["method_name"])
     switch ($_POST["method_name"]):
         case "register":
 
-            $login = addslashes($_POST["login"]);
+            if(!$_POST["login"] or !$_POST["pass"])
+            {
+                $responseFromDb["error"] = "Не верно заполненны поля";
+//                echo "<script type='text/javascript'>alert('".$responseFromDb["error"]."');</script>";
+            }
+            else
+            {
+                $login = $T_check->check1($_POST["login"]);
+                $pass  = password_hash($_POST["pass"], PASSWORD_DEFAULT);
+
+                $resDb = $DB->insert("users", ["user_name" => $login, "pass" => $pass]);
+                $responseFromDb["error"]    = ($resDb["error"])? $resDb["error_text"] : false;
+                $responseFromDb["succes"]   = ($resDb["result"])? true : false;
+            }
 
 
 
-            $resDb = $DB->insert("users", ["user_name" => $_POST["login"], "pass" => $_POST["pass"]]);
-            $responseFromDb["error"]    = ($resDb["error_text"])? $resDb["error"] : false;
-            $responseFromDb["succes"]   = ($resDb["result"])? true : false;
         break;
 
         case "login":
@@ -42,12 +55,15 @@ if($_POST["method_name"])
     <link rel="shortcut icon" href=""/>
 <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="js/sweetalert/sweetalert.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/sweetalert/sweetalert-dev.js"></script>
 </head>
 
 <body>
+
+
 
 <main>
 
@@ -76,7 +92,8 @@ if($_POST["method_name"])
 
 
 
-<script type="text/javascript" src=""></script>
+
+
 </body>
 </html>
 
