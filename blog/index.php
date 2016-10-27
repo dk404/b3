@@ -1,11 +1,32 @@
 <?php
 require_once("library/DB.php");
 require_once("library/TextSecurity.php");
+require_once("library/Auth.php");
 
-$DB = new DB();
-$T_check = new TextSecurity();
+$DB         = new DB();
+$AUTH       = new Auth();
+$T_check    = new TextSecurity();
+
+/*------------------------------
+Если был передан logout
+-------------------------------*/
+if($_GET["r"] == "logout")
+{
+    setcookie("user_id", 1, strtotime("-1 week"), "/blog/");
+    setcookie("token", 1, strtotime("-1 week"), "/blog/");
+
+    header("Location: index.php"); exit();
+//    echo "<script type='text/javascript'>  location.href = 'index.php';  </script>"; exit();
+
+}
 
 
+
+
+
+/*------------------------------
+Если была передана форма
+-------------------------------*/
 if($_POST["method_name"])
 {
     switch ($_POST["method_name"]):
@@ -32,17 +53,52 @@ if($_POST["method_name"])
 
         case "login":
 
+            if(!$_POST["login"] or !$_POST["pass"])
+            {
+                $responseFromDb["error"] = "Не верно заполненны поля";
+//                echo "<script type='text/javascript'>alert('".$responseFromDb["error"]."');</script>";
+            }
+            else {
+                $login = $T_check->check1($_POST["login"]);
 
 
-            $resDb = $DB->select("SELECT * FROM users WHERE user_name = '".$_POST["login"]."'AND pass ='".$_POST["pass"]."'");
-            $responseFromDb["error"]    = ($resDb["error"])? $resDb["error_text"] : false;
-            $responseFromDb["succes"]   = ($resDb["result"])? $resDb["result"] : false;
+                //найдем указанного пользователя
+                $resUser = $DB->select("SELECT * FROM users WHERE user_name = '".$login."'");
+                if($resUser["error"])
+                {
+                    $responseFromDb["error"] = "Такого пользователя нет";
+                }
+                else
+                {
+                    $verify  = password_verify($_POST["pass"], $resUser['result'][0]['pass']);
+                    if(!$verify)
+                    {
+                        $responseFromDb["error"] = "Неверный пароль";
+                    }
+                    else
+                    {
+                        setcookie("user_id", $resUser['result'][0]['ID'], strtotime("+1 week"), "/blog/");
+                        setcookie("token", $resUser['result'][0]['pass'], strtotime("+1 week"), "/blog/");
+                        header("Location: index.php");
+                    }
 
+
+                }
+
+
+
+            }
 
         break;
 
     endswitch;
 }
+
+
+/*------------------------------
+Проверить на авторизован или нет пользователь
+-------------------------------*/
+$auth = $AUTH->auth_check($DB);
 
 
 

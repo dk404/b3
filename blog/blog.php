@@ -1,9 +1,21 @@
 <?php
-require_once "library/DB.php";
-require_once "library/TextSecurity.php";
-$DB = new DB();
+require_once("library/DB.php");
+require_once("library/TextSecurity.php");
+require_once("library/Auth.php");
+
+$DB         = new DB();
+$AUTH       = new Auth();
 $T_security = new TextSecurity();
 
+/*------------------------------
+Основные vars
+-------------------------------*/
+$auth = $AUTH->auth_check($DB);
+
+
+/*------------------------------
+Если была передана форма
+-------------------------------*/
 if($_POST["method_name"])
 {
     switch ($_POST["method_name"]):
@@ -41,6 +53,10 @@ if($_GET["del"]){
 -----------------------------------*/
 $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC", true)["result"];
 
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -51,7 +67,12 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC", true)["result"];
 <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!--    <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>-->
 
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="js/forEditor.js"></script>
 
 </head>
 
@@ -62,9 +83,11 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC", true)["result"];
 
     <section id="Blog">
 
-        <div class="addBtn">
-            <a href="blog.php?r=add">add item</a>
-        </div>
+        <? if($auth){ ?>
+            <div class="addBtn">
+                <a href="blog.php?r=add">add item</a>
+            </div>
+        <? } ?>
 
 
 
@@ -88,10 +111,12 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC", true)["result"];
 
                 <div class="forDesc"><? echo $resItem["descr"] ?></div>
 
+                <? if($auth){ ?>
                 <div class="forAdm">
                     <a href="blog.php?r=edit&ID=<? echo $resItem["ID"] ?>">edit</a>
                     <a href="blog.php?del=<? echo $resItem["ID"] ?>">delete</a>
                 </div>
+                <? } ?>
 
             </li>
             <? } ?>

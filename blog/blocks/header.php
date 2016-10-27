@@ -13,7 +13,11 @@
         </ul>
     </nav>
     <div class="authBlock">
+        <? if(!$auth){ ?>
         <a href="index.php?r=login">Login</a>
         <a href="index.php?r=register">Register</a>
+        <? }else { ?>
+        <a href="index.php?r=logout">Logout</a>
+        <? } ?>
     </div>
 </header>
