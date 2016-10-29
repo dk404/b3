@@ -45,6 +45,10 @@ if($_POST["method_name"])
                 $resDb = $DB->insert("users", ["user_name" => $login, "pass" => $pass]);
                 $responseFromDb["error"]    = ($resDb["error"])? $resDb["error_text"] : false;
                 $responseFromDb["succes"]   = ($resDb["result"])? true : false;
+
+
+                $resmail = mail("bla@bla.com", "спасибо за регистрацию", "bla bla очень много bla");
+
             }
 
 

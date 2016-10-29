@@ -2,10 +2,12 @@
 require_once("library/DB.php");
 require_once("library/TextSecurity.php");
 require_once("library/Auth.php");
+require_once("library/Nav.php");
 
 $DB         = new DB();
 $AUTH       = new Auth();
 $T_security = new TextSecurity();
+$NAV        = new Nav();
 
 /*------------------------------
 Основные vars
@@ -51,7 +53,16 @@ if($_GET["del"]){
 /*-----------------------------------
 Выведем все записи
 -----------------------------------*/
-$resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC", true)["result"];
+
+$forNav = [
+    "limit"         => 5
+    ,"page"         => @$_GET["page"]
+    ,"posts"        => $DB->select("SELECT COUNT(*) AS n FROM blog")["result"][0]["n"]
+    ,"max_pages"    => 2
+];
+
+$resNav = $NAV->get_nav($forNav);
+$resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["start"].", ".$resNav["limit"], true)["result"];
 
 
 
@@ -62,7 +73,7 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC", true)["result"];
 <html lang="ru">
 <head>
     <meta charset="utf-8"/>
-    <title></title>
+    <title>Blog</title>
     <link rel="shortcut icon" href=""/>
 <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css"/>
@@ -121,6 +132,39 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC", true)["result"];
             </li>
             <? } ?>
         </ul>
+
+
+            <? if($resNav['stack']){ ?>
+            <section class="postrNav">
+                <ul>
+                    <? if($resNav['stack']['first']){ ?><li><a href="blog.php?page=<? echo $resNav['stack']['first'] ?>"> << </a></li><? } ?>
+                    <? if($resNav['stack']['prev']){ ?><li><a href="blog.php?page=<? echo $resNav['stack']['prev'] ?>"> < </a></li><? } ?>
+                    <? if($resNav['stack']['left']){
+                    foreach ($resNav['stack']['left'] as $item) {  ?>
+                        <li><a href="blog.php?page=<? echo $item ?>"><? echo $item ?></a></li>
+                    <? }}
+                    ?>
+
+
+                    <li><? echo $resNav['stack']['center'] ?></li>
+
+                    <? if($resNav['stack']['right']){
+                    foreach ($resNav['stack']['right'] as $item) {  ?>
+                        <li><a href="blog.php?page=<? echo $item ?>"><? echo $item ?></a></li>
+                    <? }} ?>
+
+                    <? if($resNav['stack']['next']){ ?><li><a href="blog.php?page=<? echo $resNav['stack']['next'] ?>"> > </a></li><? } ?>
+                    <? if($resNav['stack']['last']){ ?><li><a href="blog.php?page=<? echo $resNav['stack']['last'] ?>"> >> </a></li><? } ?>
+
+
+
+                </ul>
+            </section>
+            <? } ?>
+
+
+
+
         <? endif; ?>
     </section>
     
