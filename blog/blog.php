@@ -53,7 +53,6 @@ if($_GET["del"]){
 /*-----------------------------------
 Выведем все записи
 -----------------------------------*/
-
 $forNav = [
     "limit"         => 5
     ,"page"         => @$_GET["page"]
@@ -75,7 +74,7 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
     <meta charset="utf-8"/>
     <title>Blog</title>
     <link rel="shortcut icon" href=""/>
-<!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="css/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!--    <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>-->
@@ -95,8 +94,8 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
     <section id="Blog">
 
         <? if($auth){ ?>
-            <div class="addBtn">
-                <a href="blog.php?r=add">add item</a>
+            <div class="addBtn mY35">
+                <a href="blog.php?r=add"><i class="material-icons">add</i></a>
             </div>
         <? } ?>
 
@@ -118,14 +117,14 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
         <ul class="blogItems">
             <? foreach ($resItems as $resItem) { ?>
             <li>
-                <h3><? echo $resItem["title"] ?></h3>
+                <h3><a href="#"><? echo $resItem["title"] ?></a></h3>
 
                 <div class="forDesc"><? echo $resItem["descr"] ?></div>
 
                 <? if($auth){ ?>
-                <div class="forAdm">
-                    <a href="blog.php?r=edit&ID=<? echo $resItem["ID"] ?>">edit</a>
-                    <a href="blog.php?del=<? echo $resItem["ID"] ?>">delete</a>
+                <div class="forAdm mt20">
+                    <a class="a_universal" href="blog.php?r=edit&ID=<? echo $resItem["ID"] ?>">edit</a>
+                    <a class="a_universal" href="blog.php?del=<? echo $resItem["ID"] ?>">delete</a>
                 </div>
                 <? } ?>
 
@@ -135,26 +134,26 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
 
 
             <? if($resNav['stack']){ ?>
-            <section class="postrNav">
+            <section class="postrNav mt50">
                 <ul>
-                    <? if($resNav['stack']['first']){ ?><li><a href="blog.php?page=<? echo $resNav['stack']['first'] ?>"> << </a></li><? } ?>
-                    <? if($resNav['stack']['prev']){ ?><li><a href="blog.php?page=<? echo $resNav['stack']['prev'] ?>"> < </a></li><? } ?>
+                    <? if($resNav['stack']['first']){ ?><li class="first"><a href="blog.php?page=<? echo $resNav['stack']['first'] ?>"> <i class="material-icons">first_page</i> </a></li><? } ?>
+                    <? if($resNav['stack']['prev']){ ?><li class="prev"><a href="blog.php?page=<? echo $resNav['stack']['prev'] ?>"> <i class="material-icons">chevron_left</i> </a></li><? } ?>
                     <? if($resNav['stack']['left']){
                     foreach ($resNav['stack']['left'] as $item) {  ?>
-                        <li><a href="blog.php?page=<? echo $item ?>"><? echo $item ?></a></li>
-                    <? }}
-                    ?>
+                        <li class="item"><a href="blog.php?page=<? echo $item ?>"><? echo $item ?></a></li>
+                    <? }}?>
+                    
 
 
-                    <li><? echo $resNav['stack']['center'] ?></li>
+                    <li class="center"><? echo $resNav['stack']['center'] ?></li>
 
                     <? if($resNav['stack']['right']){
                     foreach ($resNav['stack']['right'] as $item) {  ?>
-                        <li><a href="blog.php?page=<? echo $item ?>"><? echo $item ?></a></li>
+                        <li class="item"><a href="blog.php?page=<? echo $item ?>"><? echo $item ?></a></li>
                     <? }} ?>
 
-                    <? if($resNav['stack']['next']){ ?><li><a href="blog.php?page=<? echo $resNav['stack']['next'] ?>"> > </a></li><? } ?>
-                    <? if($resNav['stack']['last']){ ?><li><a href="blog.php?page=<? echo $resNav['stack']['last'] ?>"> >> </a></li><? } ?>
+                    <? if($resNav['stack']['next']){ ?><li class="next"><a href="blog.php?page=<? echo $resNav['stack']['next'] ?>"> <i class="material-icons">chevron_right</i> </a></li><? } ?>
+                    <? if($resNav['stack']['last']){ ?><li class="last"><a href="blog.php?page=<? echo $resNav['stack']['last'] ?>"> <i class="material-icons">last_page</i> </a></li><? } ?>
 
 
 
@@ -167,7 +166,10 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
 
         <? endif; ?>
     </section>
-    
+
+
+    <div style="height: 100px;"></div>
+
 </main>
 
 <script type="text/javascript" src=""></script>
