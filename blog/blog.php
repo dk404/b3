@@ -1,13 +1,12 @@
 <?php
-require_once("library/DB.php");
-require_once("library/TextSecurity.php");
-require_once("library/Auth.php");
-require_once("library/Nav.php");
+require_once("autoload.php");
 
 $DB         = new DB();
 $AUTH       = new Auth();
 $T_security = new TextSecurity();
 $NAV        = new Nav();
+$PATH       = new library\Path();
+
 
 /*------------------------------
 Основные vars
@@ -75,14 +74,14 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
     <title>Blog</title>
     <link rel="shortcut icon" href=""/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="all" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="<? echo $PATH->clear_url('/blog/') ?>css/style.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <!--    <script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>-->
 
-    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="ckeditor/adapters/jquery.js"></script>
-    <script type="text/javascript" src="js/forEditor.js"></script>
+    <script type="text/javascript" src="<? echo $PATH->clear_url('/blog/') ?>js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="<? echo $PATH->clear_url('/blog/') ?>ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="<? echo $PATH->clear_url('/blog/') ?>ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="<? echo $PATH->clear_url('/blog/') ?>js/forEditor.js"></script>
 
 </head>
 
@@ -95,7 +94,7 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
 
         <? if($auth){ ?>
             <div class="addBtn mY35">
-                <a href="blog.php?r=add"><i class="material-icons">add</i></a>
+                <a href="<? echo $PATH->withoutGet() ?>?r=add"><i class="material-icons">add</i></a>
             </div>
         <? } ?>
 
@@ -123,8 +122,8 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
 
                 <? if($auth){ ?>
                 <div class="forAdm mt20">
-                    <a class="a_universal" href="blog.php?r=edit&ID=<? echo $resItem["ID"] ?>">edit</a>
-                    <a class="a_universal" href="blog.php?del=<? echo $resItem["ID"] ?>">delete</a>
+                    <a class="a_universal" href="<? echo $PATH->withoutGet() ?>?r=edit&ID=<? echo $resItem["ID"] ?>">edit</a>
+                    <a class="a_universal" href="<? echo $PATH->withoutGet() ?>?del=<? echo $resItem["ID"] ?>">delete</a>
                 </div>
                 <? } ?>
 
@@ -136,11 +135,11 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
             <? if($resNav['stack']){ ?>
             <section class="postrNav mt50">
                 <ul>
-                    <? if($resNav['stack']['first']){ ?><li class="first"><a href="blog.php?page=<? echo $resNav['stack']['first'] ?>"> <i class="material-icons">first_page</i> </a></li><? } ?>
-                    <? if($resNav['stack']['prev']){ ?><li class="prev"><a href="blog.php?page=<? echo $resNav['stack']['prev'] ?>"> <i class="material-icons">chevron_left</i> </a></li><? } ?>
+                    <? if($resNav['stack']['first']){ ?><li class="first"><a href="<? echo $PATH->withoutGet() ?>?page=<? echo $resNav['stack']['first'] ?>"> <i class="material-icons">first_page</i> </a></li><? } ?>
+                    <? if($resNav['stack']['prev']){ ?><li class="prev"><a href="<? echo $PATH->withoutGet() ?>?page=<? echo $resNav['stack']['prev'] ?>"> <i class="material-icons">chevron_left</i> </a></li><? } ?>
                     <? if($resNav['stack']['left']){
                     foreach ($resNav['stack']['left'] as $item) {  ?>
-                        <li class="item"><a href="blog.php?page=<? echo $item ?>"><? echo $item ?></a></li>
+                        <li class="item"><a href="<? echo $PATH->withoutGet() ?>?page=<? echo $item ?>"><? echo $item ?></a></li>
                     <? }}?>
                     
 
@@ -149,11 +148,11 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
 
                     <? if($resNav['stack']['right']){
                     foreach ($resNav['stack']['right'] as $item) {  ?>
-                        <li class="item"><a href="blog.php?page=<? echo $item ?>"><? echo $item ?></a></li>
+                        <li class="item"><a href="<? echo $PATH->withoutGet() ?>?page=<? echo $item ?>"><? echo $item ?></a></li>
                     <? }} ?>
 
-                    <? if($resNav['stack']['next']){ ?><li class="next"><a href="blog.php?page=<? echo $resNav['stack']['next'] ?>"> <i class="material-icons">chevron_right</i> </a></li><? } ?>
-                    <? if($resNav['stack']['last']){ ?><li class="last"><a href="blog.php?page=<? echo $resNav['stack']['last'] ?>"> <i class="material-icons">last_page</i> </a></li><? } ?>
+                    <? if($resNav['stack']['next']){ ?><li class="next"><a href="<? echo $PATH->withoutGet() ?>?page=<? echo $resNav['stack']['next'] ?>"> <i class="material-icons">chevron_right</i> </a></li><? } ?>
+                    <? if($resNav['stack']['last']){ ?><li class="last"><a href="<? echo $PATH->withoutGet() ?>?page=<? echo $resNav['stack']['last'] ?>"> <i class="material-icons">last_page</i> </a></li><? } ?>
 
 
 
