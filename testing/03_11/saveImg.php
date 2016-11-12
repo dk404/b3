@@ -26,6 +26,7 @@ function photo_add_once($arr){
             $response["error"] = "Ошибка: не верный формат изображения ".$_FILES[$inputName]["name"]. " На строке:".__LINE__;
             return $response;
         }
+
         if($imgInfo[2] > 3 or !$imgInfo[2]){
             $response["error"] = "Ошибка: не верный формат изображения ".$_FILES[$inputName]["name"]. " На строке:".__LINE__;
             return $response;
