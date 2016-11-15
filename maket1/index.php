@@ -1,3 +1,15 @@
+<?
+require_once "autoload.php";
+
+$PATH = new library\Path();
+
+echo $PATH->clear_url("/maket1/"); 
+
+?>
+
+
+
+
 <!-- todo: Что необходимо сделать?
     Задача: создать из этого статического макета - динамический
      1. Перевести из html в php
