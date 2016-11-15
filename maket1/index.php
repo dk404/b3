@@ -3,7 +3,7 @@ require_once "autoload.php";
 
 $PATH = new library\Path();
 
-echo $PATH->clear_url("/maket1/"); 
+echo $PATH->clear_url("/maket1/");
 
 ?>
 
