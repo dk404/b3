@@ -6,6 +6,8 @@ $AUTH       = new Auth();
 $T_security = new TextSecurity();
 $NAV        = new Nav();
 $PATH       = new library\Path();
+$PhotoConverter = new library\photo\SimpleImage(null);
+$FCheck         = new library\file\CheckUploadFiles();
 
 
 /*------------------------------
@@ -21,9 +23,77 @@ if($_POST["method_name"])
 {
     switch ($_POST["method_name"]):
         case "blog_add":
-            $resDb = $DB->insert("blog", ["title" => $_POST["title"], "descr" => $_POST["descr"], "text" => $_POST["text"]]);
-            $responseFromDb["error"]    = ($resDb["error_text"])? $resDb["error"] : false;
-            $responseFromDb["succes"]   = ($resDb["result"])? true : false;
+
+            //Проверим данные
+            $title = $T_security->check1($_POST["title"]);
+            $descr = $T_security->check2($_POST["descr"]);
+            $text = $T_security->check2($_POST["text"]);
+
+            if(!$title)
+            {
+                $responseFromDb["error"] = "Ошибка, пустой заголовок";
+
+            }
+            else
+            {
+
+                if($_FILES["photo"]["tmp_name"])
+                {
+                    $resCheck = $FCheck->checkOne($_FILES, "photo", "image", "3m");
+                    if($resCheck["error"])
+                    {
+                        $responseFromDb["error"] = $resCheck["error"];
+                    }
+                    else
+                    {
+                        $filename = md5(time().rand()).$resCheck["ext"];
+
+                        if(!is_dir("FILES/big")){  mkdir("FILES/big", 0777, true); }
+                        if(!is_dir("FILES/small")){  mkdir("FILES/small", 0777, true); }
+
+                        try{
+
+                            $img = $PhotoConverter->load($resCheck["file"]);
+                            $img->best_fit(500, 350)->save("FILES/big/".$filename, 90);
+                            $img->best_fit(120, 120)->save("FILES/small/".$filename, 90);
+
+                        }catch (Exception $e)
+                        {
+                            $responseFromDb["error"] = $e->getMessage();
+                        }
+
+
+                    }
+                }
+                else
+                {
+                    $filename = null;
+                }
+
+
+
+                if(!$responseFromDb["error"])
+                {
+
+                    $arrToDb = [
+                        "title"     => $title
+                        , "descr"   => $descr
+                        , "text"    => $text
+                        , "photo"   => $filename
+
+                    ];
+
+                    $resDb = $DB->insert("blog", $arrToDb);
+                    $responseFromDb["error"]    = ($resDb["error_text"])? $resDb["error"] : false;
+                    $responseFromDb["succes"]   = ($resDb["result"])? true : false;
+
+                }
+
+
+
+            }
+
+
             break;
 
         case "blog_edit":
@@ -116,7 +186,14 @@ $resItems = $DB->select("SELECT * FROM blog ORDER BY ID DESC LIMIT ".$resNav["st
         <ul class="blogItems">
             <? foreach ($resItems as $resItem) { ?>
             <li>
-                <h3><a href="#"><? echo $resItem["title"] ?></a></h3>
+                <h3><a href="#"><? echo $resItem["title"] ?></a>
+
+                    <? if($resItem["photo"]){ ?>
+                        <a target="_blank" href="<? echo "FILES/big/".$resItem["photo"] ?>">
+                            <img src="<? echo "FILES/small/".$resItem["photo"] ?>" align="right">
+                        </a>
+                    <? } ?>
+                </h3>
 
                 <div class="forDesc"><? echo $resItem["descr"] ?></div>
 

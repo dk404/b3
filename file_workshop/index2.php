@@ -29,15 +29,17 @@ $dirname           = "FILE";
                        $filename = md5(time().rand()).$resCheck["ext"];
 
                        //проверим есть ли такая папка
-                       $resDir = (!is_dir($dirname))? mkdir($dirname, 0777, true) : true ;
+                       $resDir = (!is_dir($dirname."/big"))? mkdir($dirname."/big", 0777, true) : true ;
+                       $resDir = (!is_dir($dirname."/small"))? mkdir($dirname."/small", 0777, true) : true ;
 
                        if($resDir)
                        {
 
-                           //Проводим загрузку фото
+                           //Проводим загрузку фото FILES/name.png
                            try{
                                $img = $PhotoConverter->load($resCheck["file"]);
-                               $img->best_fit(500,400)->save($dirname."/".$filename, 90);
+                               $img->best_fit(500,400)->save($dirname."/big/".$filename, 90);
+                               $img->best_fit(80,80)->save($dirname."/small/".$filename, 90);
                            }
                            catch(Exception $e)
                            {

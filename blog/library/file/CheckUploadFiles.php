@@ -23,6 +23,9 @@ class CheckUploadFiles
                                     ,"png" => "image/png"
                                     ,"gif" => "image/gif"
                                 ]
+                        ,"archive" =>[
+                                      "zip" => "application/zip"
+                                ]
                      ];
 
 
@@ -44,6 +47,7 @@ class CheckUploadFiles
             $this->response["error"] = $this->fileErrors($F[$inputName]["error"]);
             return $this->response;
         }
+
 
         //проверка на размер файла
         if(!is_null($size))
@@ -88,7 +92,7 @@ class CheckUploadFiles
 
         $e = [
 
-            1 => "Размер принятого файла превысил максимально допустимый размер, который задан директивой upload_max_filesize конфигурационного файла php.ini."
+             1 => "Размер принятого файла превысил максимально допустимый размер, который задан директивой upload_max_filesize конфигурационного файла php.ini."
             ,2 => "Размер загружаемого файла превысил значение MAX_FILE_SIZE, указанное в HTML-форме."
             ,3 => "Загружаемый файл был получен только частично."
             ,4 => "Файл не был загружен."

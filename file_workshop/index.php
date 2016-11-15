@@ -1,7 +1,7 @@
 <?php
 require_once "../blog/autoload.php";
 $converter = new library\ByteConverter();
-$PhotoConverter = new Upload(null);
+$PhotoConverter = new library\photo\Upload(null);
 
 
 $mimes = [
