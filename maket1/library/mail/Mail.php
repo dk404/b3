@@ -1,5 +1,5 @@
 <?php
-namespace mail;
+namespace library\mail;
 /*
   -------------------------------------------------
   php_libmail v 2.11 (28.06.2016) webi.ru
