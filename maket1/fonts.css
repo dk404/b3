@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: "S-1";
+    src: url(fonts/s1.otf);
+}
+
+@font-face {
+    font-family: "S-2";
+    src: url(fonts/s2.otf);
+}
+
+@font-face {
+    font-family: "S-3";
+    src: url(fonts/s3.ttf);
+}
+
+@font-face {
+    font-family: "S-4";
+    src: url(fonts/s4.otf);
+}
+
+@font-face {
+    font-family: "oslo";
+    src: url(fonts/Oslo/Oslo.ttf);
+}
+
+@font-face {
+    font-family: "sansus";
+    src: url(fonts/Sansus-Webissimo/Sansus-Webissimo-Regular.ttf);
+}
+
+.S-1{font-family: S-1;}
+.S-2{font-family: S-2;}
+.S-3{font-family: S-3;}
+.S-4{font-family: S-4;}
+
+

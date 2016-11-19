@@ -1,0 +1,583 @@
+@charset "UTF-8";
+/*-----------------------------------
+Основные цвета
+-----------------------------------*/
+/*------------------------------
+Дополнительно
+-------------------------------*/
+/*------------------------------
+Основные настройки
+-------------------------------*/
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  font-size: 14px;
+  font-family: Verdana, Geneva, sans-serif;
+  background: #efefef; }
+
+/*------------------------------
+шаблонные селекторы
+-------------------------------*/
+.postrNav ul, header, header > nav > ul {
+  display: flex;
+  flex-wrap: wrap; }
+
+.postrNav ul, header > nav > ul, .blogItems {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.blogItems > li > .forDesc {
+  font-size: 14px;
+  line-height: 1.5em; }
+  .blogItems > li > .forDesc a {
+    color: green; }
+    .blogItems > li > .forDesc a:hover {
+      color: #00cd00; }
+  .blogItems > li > .forDesc img {
+    max-width: 100%; }
+
+/*-----------------------------------
+Часто исп-мые классы
+-----------------------------------*/
+.ared {
+  color: #e34900; }
+  .ared:hover {
+    color: #973000; }
+
+.agreen {
+  color: green; }
+  .agreen:hover {
+    color: #00cd00; }
+
+.a_universal {
+  color: gray; }
+  .a_universal:hover {
+    color: #00cd00; }
+
+/*-----------------------------------
+forMargin
+-----------------------------------*/
+.mt5 {
+  margin-top: 5px; }
+
+.mr5 {
+  margin-right: 5px; }
+
+.mb5 {
+  margin-bottom: 5px; }
+
+.ml5 {
+  margin-left: 5px; }
+
+.mX5 {
+  margin-left: 5px;
+  margin-right: 5px; }
+
+.mY5 {
+  margin-top: 5px;
+  margin-bottom: 5px; }
+
+.mt10 {
+  margin-top: 10px; }
+
+.mr10 {
+  margin-right: 10px; }
+
+.mb10 {
+  margin-bottom: 10px; }
+
+.ml10 {
+  margin-left: 10px; }
+
+.mX10 {
+  margin-left: 10px;
+  margin-right: 10px; }
+
+.mY10 {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.mt15 {
+  margin-top: 15px; }
+
+.mr15 {
+  margin-right: 15px; }
+
+.mb15 {
+  margin-bottom: 15px; }
+
+.ml15 {
+  margin-left: 15px; }
+
+.mX15 {
+  margin-left: 15px;
+  margin-right: 15px; }
+
+.mY15 {
+  margin-top: 15px;
+  margin-bottom: 15px; }
+
+.mt20 {
+  margin-top: 20px; }
+
+.mr20 {
+  margin-right: 20px; }
+
+.mb20 {
+  margin-bottom: 20px; }
+
+.ml20 {
+  margin-left: 20px; }
+
+.mX20 {
+  margin-left: 20px;
+  margin-right: 20px; }
+
+.mY20 {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.mt25 {
+  margin-top: 25px; }
+
+.mr25 {
+  margin-right: 25px; }
+
+.mb25 {
+  margin-bottom: 25px; }
+
+.ml25 {
+  margin-left: 25px; }
+
+.mX25 {
+  margin-left: 25px;
+  margin-right: 25px; }
+
+.mY25 {
+  margin-top: 25px;
+  margin-bottom: 25px; }
+
+.mt30 {
+  margin-top: 30px; }
+
+.mr30 {
+  margin-right: 30px; }
+
+.mb30 {
+  margin-bottom: 30px; }
+
+.ml30 {
+  margin-left: 30px; }
+
+.mX30 {
+  margin-left: 30px;
+  margin-right: 30px; }
+
+.mY30 {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
+.mt35 {
+  margin-top: 35px; }
+
+.mr35 {
+  margin-right: 35px; }
+
+.mb35 {
+  margin-bottom: 35px; }
+
+.ml35 {
+  margin-left: 35px; }
+
+.mX35 {
+  margin-left: 35px;
+  margin-right: 35px; }
+
+.mY35 {
+  margin-top: 35px;
+  margin-bottom: 35px; }
+
+.mt40 {
+  margin-top: 40px; }
+
+.mr40 {
+  margin-right: 40px; }
+
+.mb40 {
+  margin-bottom: 40px; }
+
+.ml40 {
+  margin-left: 40px; }
+
+.mX40 {
+  margin-left: 40px;
+  margin-right: 40px; }
+
+.mY40 {
+  margin-top: 40px;
+  margin-bottom: 40px; }
+
+.mt45 {
+  margin-top: 45px; }
+
+.mr45 {
+  margin-right: 45px; }
+
+.mb45 {
+  margin-bottom: 45px; }
+
+.ml45 {
+  margin-left: 45px; }
+
+.mX45 {
+  margin-left: 45px;
+  margin-right: 45px; }
+
+.mY45 {
+  margin-top: 45px;
+  margin-bottom: 45px; }
+
+.mt50 {
+  margin-top: 50px; }
+
+.mr50 {
+  margin-right: 50px; }
+
+.mb50 {
+  margin-bottom: 50px; }
+
+.ml50 {
+  margin-left: 50px; }
+
+.mX50 {
+  margin-left: 50px;
+  margin-right: 50px; }
+
+.mY50 {
+  margin-top: 50px;
+  margin-bottom: 50px; }
+
+.mt55 {
+  margin-top: 55px; }
+
+.mr55 {
+  margin-right: 55px; }
+
+.mb55 {
+  margin-bottom: 55px; }
+
+.ml55 {
+  margin-left: 55px; }
+
+.mX55 {
+  margin-left: 55px;
+  margin-right: 55px; }
+
+.mY55 {
+  margin-top: 55px;
+  margin-bottom: 55px; }
+
+.mt60 {
+  margin-top: 60px; }
+
+.mr60 {
+  margin-right: 60px; }
+
+.mb60 {
+  margin-bottom: 60px; }
+
+.ml60 {
+  margin-left: 60px; }
+
+.mX60 {
+  margin-left: 60px;
+  margin-right: 60px; }
+
+.mY60 {
+  margin-top: 60px;
+  margin-bottom: 60px; }
+
+.mt65 {
+  margin-top: 65px; }
+
+.mr65 {
+  margin-right: 65px; }
+
+.mb65 {
+  margin-bottom: 65px; }
+
+.ml65 {
+  margin-left: 65px; }
+
+.mX65 {
+  margin-left: 65px;
+  margin-right: 65px; }
+
+.mY65 {
+  margin-top: 65px;
+  margin-bottom: 65px; }
+
+.mt70 {
+  margin-top: 70px; }
+
+.mr70 {
+  margin-right: 70px; }
+
+.mb70 {
+  margin-bottom: 70px; }
+
+.ml70 {
+  margin-left: 70px; }
+
+.mX70 {
+  margin-left: 70px;
+  margin-right: 70px; }
+
+.mY70 {
+  margin-top: 70px;
+  margin-bottom: 70px; }
+
+.mt75 {
+  margin-top: 75px; }
+
+.mr75 {
+  margin-right: 75px; }
+
+.mb75 {
+  margin-bottom: 75px; }
+
+.ml75 {
+  margin-left: 75px; }
+
+.mX75 {
+  margin-left: 75px;
+  margin-right: 75px; }
+
+.mY75 {
+  margin-top: 75px;
+  margin-bottom: 75px; }
+
+.mt80 {
+  margin-top: 80px; }
+
+.mr80 {
+  margin-right: 80px; }
+
+.mb80 {
+  margin-bottom: 80px; }
+
+.ml80 {
+  margin-left: 80px; }
+
+.mX80 {
+  margin-left: 80px;
+  margin-right: 80px; }
+
+.mY80 {
+  margin-top: 80px;
+  margin-bottom: 80px; }
+
+.mt85 {
+  margin-top: 85px; }
+
+.mr85 {
+  margin-right: 85px; }
+
+.mb85 {
+  margin-bottom: 85px; }
+
+.ml85 {
+  margin-left: 85px; }
+
+.mX85 {
+  margin-left: 85px;
+  margin-right: 85px; }
+
+.mY85 {
+  margin-top: 85px;
+  margin-bottom: 85px; }
+
+.mt90 {
+  margin-top: 90px; }
+
+.mr90 {
+  margin-right: 90px; }
+
+.mb90 {
+  margin-bottom: 90px; }
+
+.ml90 {
+  margin-left: 90px; }
+
+.mX90 {
+  margin-left: 90px;
+  margin-right: 90px; }
+
+.mY90 {
+  margin-top: 90px;
+  margin-bottom: 90px; }
+
+.mt95 {
+  margin-top: 95px; }
+
+.mr95 {
+  margin-right: 95px; }
+
+.mb95 {
+  margin-bottom: 95px; }
+
+.ml95 {
+  margin-left: 95px; }
+
+.mX95 {
+  margin-left: 95px;
+  margin-right: 95px; }
+
+.mY95 {
+  margin-top: 95px;
+  margin-bottom: 95px; }
+
+.mt100 {
+  margin-top: 100px; }
+
+.mr100 {
+  margin-right: 100px; }
+
+.mb100 {
+  margin-bottom: 100px; }
+
+.ml100 {
+  margin-left: 100px; }
+
+.mX100 {
+  margin-left: 100px;
+  margin-right: 100px; }
+
+.mY100 {
+  margin-top: 100px;
+  margin-bottom: 100px; }
+
+/*-----------------------------------
+Постраничная навигация
+-----------------------------------*/
+.postrNav ul {
+  justify-content: center; }
+  .postrNav ul li {
+    margin: 0 5px; }
+    .postrNav ul li a {
+      text-decoration: none;
+      color: green; }
+      .postrNav ul li a:hover {
+        color: #00cd00; }
+      .postrNav ul li a i {
+        font-size: 32px; }
+    .postrNav ul li.item {
+      font-size: 24px; }
+    .postrNav ul li.center {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00cd00; }
+
+main {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto; }
+
+header {
+  justify-content: space-between; }
+  header > nav {
+    position: relative; }
+    header > nav > ul li {
+      margin-right: 10px; }
+      header > nav > ul li a {
+        display: block;
+        padding: 8px 0;
+        font-size: 0.8em;
+        color: green; }
+        header > nav > ul li a:hover {
+          color: #00cd00; }
+  header > .authBlock {
+    position: relative; }
+    header > .authBlock a {
+      display: inline-block;
+      padding: 8px 0;
+      font-size: 0.8em;
+      color: green; }
+      header > .authBlock a:hover {
+        color: #00b300; }
+
+section#register .responseFromDb {
+  position: relative;
+  margin-bottom: 50px; }
+  section#register .responseFromDb .error, section#register .responseFromDb .succes {
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px; }
+  section#register .responseFromDb .succes {
+    border-color: green; }
+section#register h2 {
+  font-family: "Roboto Condensed", sans-serif;
+  color: gray; }
+section#register input[type='text'], section#register input[type='password'] {
+  padding: 6px 10px;
+  outline: none;
+  width: 300px; }
+
+section#users h1 {
+  font-family: "Roboto Condensed", sans-serif; }
+section#users h2 {
+  font-family: "Roboto Condensed", sans-serif; }
+section#users h3 {
+  font-family: "Roboto Condensed", sans-serif; }
+section#users h4 {
+  font-family: "Roboto Condensed", sans-serif; }
+section#users h5 {
+  font-family: "Roboto Condensed", sans-serif; }
+section#users h6 {
+  font-family: "Roboto Condensed", sans-serif; }
+section#users table {
+  width: 100%;
+  border-spacing: 0; }
+  section#users table thead th {
+    border-bottom: 1px solid black; }
+  section#users table tbody td {
+    border-right: 1px solid black;
+    padding: 10px; }
+    section#users table tbody td:last-of-type {
+      border-right: 0; }
+
+/*-----------------------------------
+Список записей
+-----------------------------------*/
+.blogItems > li {
+  border-bottom: 1px solid #cdcdcd;
+  padding-bottom: 15px;
+  margin-bottom: 25px; }
+  .blogItems > li > h3 > a {
+    color: green; }
+    .blogItems > li > h3 > a:hover {
+      color: #00cd00; }
+  .blogItems > li > .forAdm {
+    text-align: right; }
+    .blogItems > li > .forAdm a {
+      font-size: 12px; }
+
+/*-----------------------------------
+Элементы управления
+-----------------------------------*/
+.addBtn {
+  text-align: center; }
+  .addBtn a {
+    color: green; }
+    .addBtn a:hover, .addBtn a.active {
+      color: #00cd00; }
+  .addBtn i {
+    font-size: 42px;
+    font-weight: bold; }
+
+/*# sourceMappingURL=style.css.map */
