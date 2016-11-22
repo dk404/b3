@@ -1,24 +1,48 @@
 <?php
-require_once "../07/library/Encrypt.php";
 
-$ENCrypt = new Encrypt();
+class Generic
+{
 
+    private   $someVar, $result;
+    const     NUM_ERROR       = 1;
+    const     ANY_ERROR       = 2;
 
-$pass = "Семен семёныч 1";
+    public function __construct($someVar)
+    {
+        $this->someVar = $someVar;
+    }
 
-$crypt = $ENCrypt->enCrypt($pass);
+    public function testValue($someOtherVar)
+    {
+        if($someOtherVar > 3) {
+            throw new Exception('Значение параметра не божет быть больше 3!', self::NUM_ERROR);
+        } else {
+            $this->result = $this->someVar + $someOtherVar;
+            echo $this->result . '<br />';
+        }
+    }
 
-$getPassFromCrypt = $ENCrypt->deCrypt($crypt);
+    public function otherMethod()
+    {
+        if($this->result > 4) {
+            throw new Exception('Результат больше 4.', self::ANY_ERROR);
+        }
+    }
+}
 
-$hash = md5($pass);
-//$hash = sha1($pass);
-
-
-
-
-$hash = password_hash($pass, PASSWORD_DEFAULT);
-$res  = password_verify($pass, '$2y$10$Cr5s8RscJT1kMvaUkz6O7.r4nISBu.BWT6pXmD3PNoAg3XKCi399.');
-$dfdf = 1;
-
-?>
-
+// Начинаем охоту
+try
+{
+    $gen = new Generic(3);
+    $gen->testValue(2);
+    $gen->otherMethod();
+} catch (Exception $e) {
+    if($e->getCode() == 1) {
+        die ($e->getMessage());
+    } else {
+        echo 'Error :' . $e->getMessage() . '<br />';
+        echo 'File :' . $e->getFile() . '<br />';
+        echo 'Line :' . $e->getLine() . '<br />';
+        exit();
+    }
+}

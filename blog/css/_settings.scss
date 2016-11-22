@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+/*-----------------------------------
+Основные цвета
+-----------------------------------*/
+$green: green;
+$lightGreen: lighten($green, 15%);
+$gray: gray;
+$red: #e34900;
+
+
+
+/*------------------------------
+Дополнительно
+-------------------------------*/
+$roboto: 'Roboto Condensed', sans-serif;
 
 /*------------------------------
 Основные настройки
@@ -28,10 +42,46 @@ html,body{
   margin: 0;
 }
 
-/*------------------------------
-param
--------------------------------*/
-$roboto: 'Roboto Condensed', sans-serif;
+%text{
+  font-size: 14px;
+  line-height: 1.5em;
+  a{
+    color: $green;
+    
+    &:hover{
+      color: $lightGreen;
+    }
+  }
+  img{
+    max-width: 100%;
+  }
+}
+
+/*-----------------------------------
+Часто исп-мые классы
+-----------------------------------*/
+.ared{
+  color: $red;
+  
+  &:hover{
+    color: darken($red, 15%);
+  }
+}
+.agreen{
+  color: $green;
+  
+  &:hover{
+    color: lighten($green, 15%);
+  }
+}
+.a_universal{
+  color: $gray;
+
+  &:hover{
+    color: lighten($green, 15%);
+  }
+}
+
 
 /*-----------------------------------
 forMargin
@@ -47,5 +97,55 @@ $i: 5; $step: 5; $max: 100;
   .ml#{$i}{
     margin-left:$i + px;}
 
+  .mX#{$i}{
+    margin-left:$i + px;
+    margin-right:$i + px;
+  }
+
+  .mY#{$i}{
+    margin-top:$i + px;
+    margin-bottom:$i + px;
+  }
+
+
   $i: $i + $step;
+}
+
+/*-----------------------------------
+Постраничная навигация
+-----------------------------------*/
+.postrNav{
+  ul{
+    @extend %ul, %flex;
+    justify-content: center;
+    //align-items: center;
+
+    li{
+      margin: 0 5px;
+
+      a{
+        text-decoration: none;
+        color: $green;
+
+        &:hover{
+          color: $lightGreen;
+
+
+        }
+
+        i{
+          font-size: 32px;
+        }
+      }
+
+      &.item{
+        font-size: 24px;
+      }
+      &.center{
+        font-size: 24px;
+        font-weight: bold;
+        color: $lightGreen;
+      }
+    }
+  }
 }
