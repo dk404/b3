@@ -18,8 +18,14 @@ $method = ($thisItem)? "edit" : "add";
         <input type="hidden" name="ID" value="<? echo $thisItem["ID"] ?>">
         <input type="text" name="title" value="<? echo $thisItem["title"] ?>"/><br><br>
 
+        <div>добавить файл <br>
+            <input type="file" name="photo">
+        </div>
+        <br><br>
+
         <textarea  name="descr" class="fullArea" cols="30" rows="10" placeholder="короткое описание"><? echo $thisItem["descr"] ?></textarea>
 
+        
 
         <br><br>
         <textarea name="text" class="simpleArea" cols="30" rows="10" placeholder="Полный тест"><? echo $thisItem["text"] ?></textarea><br><br>

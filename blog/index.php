@@ -1,11 +1,12 @@
 <?php
-require_once("library/DB.php");
-require_once("library/TextSecurity.php");
-require_once("library/Auth.php");
+require_once("autoload.php");
 
 $DB         = new DB();
 $AUTH       = new Auth();
 $T_check    = new TextSecurity();
+$Mail       = new mail\Mail('utf-8');
+
+
 
 /*------------------------------
 Если был передан logout
@@ -45,6 +46,25 @@ if($_POST["method_name"])
                 $resDb = $DB->insert("users", ["user_name" => $login, "pass" => $pass]);
                 $responseFromDb["error"]    = ($resDb["error"])? $resDb["error_text"] : false;
                 $responseFromDb["succes"]   = ($resDb["result"])? true : false;
+
+
+                //Отправим письмо
+//                $resmail = mail("bla@bla.com", "", "bla bla очень много bla");
+
+
+                $tmp = "
+                    <h2>Спасибо за регистрацию</h2>
+                    <p>Ваш логин: <b>".$login."</b></p>
+                    <p>Ваш пароль: <b>".$_POST["pass"]."</b></p>
+                ";
+
+
+                $Mail->To('bla@bla.com');
+                $Mail->Subject('спасибо за регистрацию');
+                $Mail->Body($tmp, "html");
+                $Mail->log_on(true);
+                $Mail->Send();
+
             }
 
 
