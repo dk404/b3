@@ -34,6 +34,11 @@ class TextSecurity
 
         return $string;
     }
-    
+
+    public function check_email($email)
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
 
 }
