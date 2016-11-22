@@ -5,7 +5,7 @@ class DB
                                       "host"  => "127.0.0.1"
                                     , "login" => "root"
                                     , "pass"  => ''
-                                    , "db"    => "b3"
+                                    , "db"    => "maket1"
                                 ];
 
     private $db_connect;
