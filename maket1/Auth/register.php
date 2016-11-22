@@ -2,12 +2,15 @@
 require_once "../autoload.php";
 $DB = new DB();
 $MAIL = new library\mail\Mail("utf-8");
+$PATH = new library\Path();
+$CheckText = new TextSecurity();
+
 
 // Ловим форму
 if($_POST["email"] and $_POST["pass"]) {
 
     //проверка данных
-    $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
+    $email = $CheckText->check_email($_POST["email"]);
     if(!$email){ exit("incorrect email"); }
 
     // Существует ли такой имейл в базе,
@@ -38,14 +41,12 @@ if($_POST["email"] and $_POST["pass"]) {
     if(!$resDb["result"]){exit("Ошибка при записи в базу");}
 
 
-    //send email
-    $mailHtml = "<H1>Approve your email</H1> <p>To complete registration click on url: ".$token."</p>";
+    //send confirming mail
+    $mailHtml = "<H1>Approve your email</H1> <p>To complete registration click on url <a href=".$PATH->clear_url("maket1/")."Auth/confirm.php?token=>".$token."</a></p>";
     $MAIL->To($email);
     $MAIL->Subject("Подтверждение");
     $MAIL->Body($mailHtml, "html");
-
-
-
+    $MAIL->Send();
 
 
 
@@ -53,6 +54,7 @@ if($_POST["email"] and $_POST["pass"]) {
 else if($_POST["email"] and !$_POST["pass"]){
     exit("pass can't be empty");
 }
+
 
 
 ?>

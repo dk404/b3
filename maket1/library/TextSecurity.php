@@ -29,11 +29,19 @@ class TextSecurity
     public function check2($string)
     {
         $string = addslashes($string);
-        $string = str_replace("`",'&lsquo;', $string);
+        $string = str_replace("`", '&lsquo;', $string);
         $string = trim($string);
 
         return $string;
     }
-    
+
+    public function check_email($email)
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
+
 
 }
+
+

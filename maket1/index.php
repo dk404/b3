@@ -5,6 +5,7 @@ $PATH = new library\Path();
 
 echo $PATH->clear_url("/maket1/");
 
+$Checktext = new TextSecurity()
 ?>
 
 
