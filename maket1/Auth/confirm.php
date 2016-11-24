@@ -1,27 +1,14 @@
 <?php
 
+require_once "../autoload.php";
+$PATH = new library\Path();
+$DB = new DB();
+$CheckText = new TextSecurity();
 
 
+if($_GET["token"]) {
+$token = $CheckText->check1($_GET["token"]);
+$resDB = $DB->select("SELECT ID FROM confirmemail  WHERE token='".$token."'");
 
+}
 ?>
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8"/>
-    <title></title>
-    <link rel="shortcut icon" href=""/>
-    <link rel="stylesheet" type="text/css" media="all" href=""/>
-
-    <script type="text/javascript" src=""></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-
-</head>
-
-<body>
-
-
-</body>
-</html>

@@ -42,7 +42,7 @@ if($_POST["email"] and $_POST["pass"]) {
 
 
     //send confirming mail
-    $mailHtml = "<H1>Approve your email</H1> <p>To complete registration click on url <a href=".$PATH->clear_url("maket1/")."Auth/confirm.php?token=>".$token."</a></p>";
+    $mailHtml = "<H1>Approve your email</H1> <p>To complete registration click on url <a href=".$PATH->clear_url("/maket1/")."Auth/confirm.php?token=".$token.">".$PATH->clear_url("/maket1/")."Auth/confirm.php?token=".$token." </a></p>";
     $MAIL->To($email);
     $MAIL->Subject("Подтверждение");
     $MAIL->Body($mailHtml, "html");
