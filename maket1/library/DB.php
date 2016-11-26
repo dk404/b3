@@ -92,8 +92,8 @@ class DB
     /**
      * Метод для внесения правок в базу
      * @param $table -  название таблицы
-     * @param $arr
-     * @param $where
+     * @param $arr Колонки в базе и значения
+     * @param $where Условие
      * @param bool|false $close
      * @return mixed
      */
