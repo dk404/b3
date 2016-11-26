@@ -4,8 +4,10 @@
 -------------------------------*/
 require_once("autoload.php");
 
-$DB      = new DB();
-$T_check    = new TextSecurity();
+$DB       = new DB();
+$T_check  = new TextSecurity();
+$Mail     = new \mail\Mail('utf-8');
+$Path     = new library\Path();
 
 
 /*------------------------------
@@ -34,6 +36,9 @@ if($_POST["method_name"] == "register")
         }
 
 
+
+
+
         //ФОРМИРУЕМ ДАННЫЕ ДЛЯ ЗАПИСИ В БАЗУ
         $arr = [
             "email"          => $_POST["email"]
@@ -45,13 +50,30 @@ if($_POST["method_name"] == "register")
         ];
 
 
-
-
-
         //записываем данные в таблицу
         $resInsert = $DB->insert("users", $arr, $close=false);
+        if($resInsert["error"])
+        {
+            exit($resInsert["error_text"]);
+        }
+
+        //отправляем письмо
+        $tmp = "Спасибо за регистрацию. Для подтверждения регистрации перейдите по ссылке
+                <a href='".$Path->clear_url('/maket1/')."confirm.php?token=".$arr["token"]."'>".$Path->clear_url('/maket1/')."confirm.php?token=".$arr["token"]."</a>";
+
+        $Mail->To($_POST["email"]);
+        $Mail->Subject("Регистрация");
+        $Mail->Body($tmp, "html");
+        $Mail->log_on(true);
+        $resSend = $Mail->Send();
 
 
+    if(!$resSend)
+    {
+        exit($Mail->status_mail['message']);
+    }
+
+    $success = "спасибо, осталось подтвердить ваш email";
 
 
 
@@ -82,17 +104,18 @@ if($_POST["method_name"] == "register")
 
 <body>
 
-<form action="" method="post" enctype="multipart/form-data" name="myForm" target="_self">
-    <input type="hidden" name="method_name" value="register">
+<? if(!$success){ ?>
+    <form action="" method="post" enctype="multipart/form-data" name="myForm" target="_self">
+        <input type="hidden" name="method_name" value="register">
 
-    <h3>Регистрация</h3>
+        <h3>Регистрация</h3>
 
-    <input type="text" name="email" value="" placeholder="email"/><br><br>
-    <input type="password" name="pass" value="" placeholder="pass"/><br><br>
+        <input type="text" name="email" value="" placeholder="email"/><br><br>
+        <input type="password" name="pass" value="" placeholder="pass"/><br><br>
 
-    <input name="submit" type="submit" value="регистрация"/>
-</form>
-
+        <input name="submit" type="submit" value="регистрация"/>
+    </form>
+<? }else { echo $success; } ?>
 
 
 

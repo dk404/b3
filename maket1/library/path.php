@@ -7,7 +7,7 @@ class Path{
 
 
     /**
-     * Вывод чистого uri пути
+     * Вывод чистого uri пути (C:\)
      * @return string
      */
     public function clear_path(){
@@ -15,7 +15,7 @@ class Path{
     }
 
     /**
-     * Вывод читого URL
+     * Вывод читого URL (http)
      * @return string
      */
     public function clear_url($dir = null){
