@@ -1,15 +1,12 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: sht_j
- * Date: 27.10.2016
- * Time: 18:57
- */
+namespace library;
+
 class Auth
 {
 
     /**
+     * проверка авторизован ли наш пользователь
      * @param $DB - это экземпляр объекта new mysqli
      * @return bool|int|string
      */
@@ -20,13 +17,13 @@ class Auth
 
         //найдем указанного пользователя
         $resUser = $DB->select("SELECT * FROM users WHERE ID = '".$_COOKIE["user_id"]."'");
-        if($resUser["error"] or $resUser['result'][0]['pass'] != $_COOKIE["token"])
+        if($resUser["error"] or $resUser['result'][0]['token'] != $_COOKIE["token"])
         {
             return false;
         }
         else
         {
-            return $_COOKIE["user_id"];
+            return $resUser['result'][0];
         }
 
     }

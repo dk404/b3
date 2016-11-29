@@ -2,8 +2,18 @@
 require_once "autoload.php";
 
 $PATH = new library\Path();
+$DB = new DB();
+$Auth = new library\Auth();
 
 //echo $PATH->clear_url("/maket1/");
+
+$user = $Auth->auth_check($DB);
+
+if($user)
+{
+    echo $user["email"];
+}
+
 
 ?>
 
@@ -39,6 +49,9 @@ $PATH = new library\Path();
                 <li><a href="#">service</a></li>
                 <li><a href="#">projects</a></li>
                 <li><a href="#">contacts</a></li>
+                <? if($user["status"] == 1){ ?>
+                    <li><a href="#">admin</a></li>
+                <? } ?>
             </ul>
             <div class="clear"></div>
 
