@@ -94,8 +94,7 @@ body{
         height: 100%;
         float: left;
 
-        background: url(http://www.freezewall.com/view/7/AL116/city_1020.jpg) no-repeat center;
-        background-size: cover;
+        background: no-repeat center / cover;
     }
 
     .slider>.info{

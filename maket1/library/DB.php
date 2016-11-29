@@ -1,11 +1,14 @@
 <?php
+
+namespace library;
+
 class DB
 {
     private $connect_settings = [
                                       "host"  => "127.0.0.1"
                                     , "login" => "root"
                                     , "pass"  => ''
-                                    , "db"    => "b3"
+                                    , "db"    => "maket1"
                                 ];
 
     private $db_connect;
@@ -38,7 +41,7 @@ class DB
 //        if($this->db_connect && $this->db_connect->ping()){ return $this->db_connect; } //false
         if($this->db_connect instanceof mysqli && $this->db_connect->ping()){ return $this->db_connect; } //false
 
-        $mysqli = new mysqli($this->connect_settings["host"], $this->connect_settings["login"], $this->connect_settings["pass"], $this->connect_settings["db"]);
+        $mysqli = new \mysqli($this->connect_settings["host"], $this->connect_settings["login"], $this->connect_settings["pass"], $this->connect_settings["db"]);
         if($mysqli->connect_errno){
             exit($mysqli->connect_error);
         }
@@ -141,6 +144,12 @@ class DB
     }
 
 
+    /**
+     * Выборка из бд
+     * @param $sql - SELECT запрос
+     * @param bool|false $close
+     * @return mixed
+     */
     public function select($sql, $close = false){
 
         $this->connect();
@@ -167,6 +176,32 @@ class DB
         //response
         return $result;
     }
+
+
+    /**
+     * Выборка одной строки из бд
+     * @param $sql - select запрос
+     * @param bool|false $close
+     */
+    public function select_one($sql, $close = false)
+    {
+        $sql .= " LIMIT 0,1";
+
+        $resSelect = $this->select($sql, $close);
+
+        if($resSelect["error"])
+        {
+            return $resSelect;
+        }
+
+        $resSelect["result"] = $resSelect["result"][0];
+
+        return $resSelect;
+
+    }
+
+
+
 
 
 

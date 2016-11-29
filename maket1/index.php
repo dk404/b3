@@ -3,23 +3,9 @@ require_once "autoload.php";
 
 $PATH = new library\Path();
 
-echo $PATH->clear_url("/maket1/");
+
 
 ?>
-
-
-
-
-<!-- todo: Что необходимо сделать?
-    Задача: создать из этого статического макета - динамический
-     1. Перевести из html в php
-     2. Разбить страницу на части
-     3. Скопировать библиотеки
-     4. Создать необходимые таблицы в бд
-     5. Создать админ страницы для управления информацией "этих" частей
--->
-
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -45,7 +31,7 @@ echo $PATH->clear_url("/maket1/");
         </header>
 
         <section class="slider">
-            <div class="photo"></div>
+            <div class="photo" style="background-image:url(http://placehold.it/500x400/);"></div>
             <div class="info">
                 <ul class="info-list">
                     <li><span>Property type:</span><span>56m</span></li>
