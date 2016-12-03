@@ -1,9 +1,8 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 27.11.16
- * Time: 1:56 PM
- */
+<meta charset="utf-8">
 
-echo __DIR__;
+<?php
+
+ echo 'hello world'.'<br>';
+
+$GLOBALS['x'];
+

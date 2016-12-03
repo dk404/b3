@@ -4,8 +4,8 @@ class DB
     private $connect_settings = [
                                       "host"  => "127.0.0.1"
                                     , "login" => "root"
-                                    , "pass"  => ''
-                                    , "db"    => "maket1"
+                                    , "pass"  => 'root'
+                                    , "db"    => "b3"
                                 ];
 
     private $db_connect;
@@ -38,7 +38,13 @@ class DB
 //        if($this->db_connect && $this->db_connect->ping()){ return $this->db_connect; } //false
         if($this->db_connect instanceof mysqli && $this->db_connect->ping()){ return $this->db_connect; } //false
 
-        $mysqli = new mysqli($this->connect_settings["host"], $this->connect_settings["login"], $this->connect_settings["pass"], $this->connect_settings["db"]);
+        $mysqli = new mysqli(
+            $this->connect_settings["host"],
+            $this->connect_settings["login"],
+            $this->connect_settings["pass"],
+            $this->connect_settings["db"],
+            3308
+        );
         if($mysqli->connect_errno){
             exit($mysqli->connect_error);
         }
