@@ -1,5 +1,11 @@
 <?php
 
+// http://be2.php.net/manual/ru/book.array.php
+
+
+
+
+
 // Способ номер 1
 $sallary = [
     "andrey"=>5500,
@@ -56,6 +62,38 @@ echo $loft["sallary"][3]."<br>";
 
 $c = array_merge($sallary,$f_sallary,$loft);
 
-var_dump($c)
+var_dump($c);
+
+
+$yea = [
+    1=>'Январь',
+    2=>'Февраль',
+    3=>'Март',
+    4=>'Апрель',
+    5=>'Май',
+    6=>'Июнь',
+    7=>'Июль',
+    8=>'Август',
+    9=>'Сентябрь',
+    10=>'Октябрь',
+    11=>'Ноябрь',
+    12=>'Декабрь'
+];
+
+$a = array_values($yea); // собирает значение массива
+$b = array_keys($yea);   // собирает ключи массива
+$c = array_pop($yea);    // собирает последний элемент массива
+$d = array_shift($yea);  //собирает первый элемент массива
+$e = array_push($yea);   // влаживает значение в конец массива
+$f = array_flip($yea);   // меняет местами ключи и значения
+$g = count($yea);        //возвращает количество элементов в массиве
+var_dump($d);
+
+$c = array_pop($yea);
+var_dump($c);
+
+$h =array_push($yea);
+var_dump($h);
+
 ?>
 
