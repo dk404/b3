@@ -38,11 +38,11 @@ echo $Job["Lena"]."<br>";
 //массив в массиве - многомерный
 
 $a=[
-  "Salary"=>[
-      1=>"Monday",
-      2=>"Tuesday",
-      3=>"Wensday"
-  ] ,
+    "Salary"=>[
+        1=>"Monday",
+        2=>"Tuesday",
+        3=>"Wensday"
+    ] ,
     "Study"=>[
         1=>"March",
         2=>"April",
