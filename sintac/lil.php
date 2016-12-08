@@ -45,7 +45,9 @@ $week = [
 ];
 
 
-//foreach($week as $item){                      // вытягивает значение
+//for
+//
+//each($week as $item){                      // вытягивает значение
 //    echo "<p>".$item."</p>";
 //}
 
